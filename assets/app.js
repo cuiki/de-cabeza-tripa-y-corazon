@@ -53,37 +53,119 @@
     return chain;
   };
 
-  /* ---- Sidebar ---- */
-  function buildSidebar() {
+  /* ---- Estado de expansión (persistente entre navegaciones) ----
+     Set de ids expandidos. Expandir/colapsar un nodo NO afecta a los demás (sin
+     acordeón). Al navegar se AÑADE la rama activa, pero nunca se cierra lo que el
+     usuario abrió manualmente. El sidebar se re-renderiza desde este Set. */
+  const EXPANDED = new Set();
+
+  /* ---- Sidebar estilo Notion (recursivo + colapsable) ----
+     - Marcador: emoji si lo tiene; si no, ícono Phosphor (node.icon); si no, "•".
+     - El row de un nodo CON página es un <a> que navega (#/id); el expandir/
+       colapsar es EXCLUSIVO del botón-chevron (stopPropagation/preventDefault).
+     - Un nodo con hijos pero SIN página (group:true) alterna con el row entero.
+     - En hover de la fila (solo si tiene hijos) el marcador se reemplaza por el
+       botón-chevron (▾ abierto · ▸ cerrado), con su propio afford de hover.
+     - Antes de un top-level con topDivider:true dibuja <hr> y, si trae overline,
+       un encabezado overline no interactivo (p. ej. "Recursos"). */
+  function buildSidebar(activeId) {
     const nav = $("#nav");
     nav.innerHTML = "";
-
+    // abre la rama activa sin cerrar lo que el usuario ya abrió
+    ancestors(activeId).forEach((id) => EXPANDED.add(id));
     W.tree.forEach((node) => {
-      nav.appendChild(navLink(node));
-      if (node.children) {
-        const wrap = el("div", "nav-children");
-        node.children.forEach((child) => {
-          if (child.group) {
-            wrap.appendChild(el("div", "nav-section-label", esc(child.navLabel || child.title)));
-            const sub = el("div", "nav-children");
-            (child.children || []).forEach((g) => sub.appendChild(navLink(g)));
-            wrap.appendChild(sub);
-          } else {
-            wrap.appendChild(navLink(child));
-          }
-        });
-        nav.appendChild(wrap);
+      if (node.topDivider) nav.appendChild(el("hr", "nav-divider"));
+      if (node.overline) {
+        const ov = el("div", "nav-section-label", esc(node.overline));
+        ov.setAttribute("aria-hidden", "true");
+        nav.appendChild(ov);
       }
+      nav.appendChild(navNode(node, activeId));
     });
   }
-  function navLink(node) {
-    const a = el("a", "nav-link");
-    a.href = "#/" + node.id;
-    a.dataset.id = node.id;
-    a.innerHTML =
-      '<span class="emoji">' + (node.emoji || "•") + "</span>" +
-      "<span>" + esc(node.navLabel || node.title) + "</span>";
-    return a;
+
+  // Marcador del nodo: emoji → ícono Phosphor → bullet
+  function markerInner(node) {
+    if (node.emoji) return node.emoji;
+    if (node.icon) return '<i class="ph ' + node.icon + '" aria-hidden="true"></i>';
+    return "•";
+  }
+
+  function navNode(node, activeId) {
+    const hasChildren = !!(node.children && node.children.length);
+    const navigable = !node.group;            // los group:true no tienen página
+    const expanded = !hasChildren || EXPANDED.has(node.id);
+
+    const wrap = el("div", "nav-node");
+    if (hasChildren && !expanded) wrap.classList.add("collapsed");
+
+    // ----- el row: <a> navegable, o <div role=button> para grupos -----
+    let row;
+    if (navigable) {
+      row = el("a", "nav-row " + (hasChildren ? "nav-branch" : "nav-leaf"));
+      row.href = "#/" + node.id;
+    } else {
+      row = el("div", "nav-row nav-branch nav-group");
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+    }
+    if (node.id === activeId) row.classList.add("active");
+    row.dataset.id = node.id;
+
+    // ----- marcador (emoji/ícono/bullet) + chevron apilados -----
+    const marker = el("span", "nav-marker" + (hasChildren ? " has-chev" : ""));
+    const icon = el("span", "marker-icon", markerInner(node));
+    icon.setAttribute("aria-hidden", "true");
+    marker.appendChild(icon);
+    let chev = null;
+    if (hasChildren) {
+      chev = el("span", "marker-chev");
+      marker.appendChild(chev);
+    }
+    row.appendChild(marker);
+    row.appendChild(el("span", "label", esc(node.navLabel || node.title)));
+
+    // ----- hijos (recursivo) -----
+    let kids = null;
+    if (hasChildren) {
+      kids = el("div", "nav-children");
+      node.children.forEach((c) => kids.appendChild(navNode(c, activeId)));
+    }
+
+    // ----- comportamiento expandir/colapsar (bidireccional, vía el Set) -----
+    if (hasChildren) {
+      // el control del toggle es el chevron (navegable) o el row entero (grupo)
+      const control = navigable ? chev : row;
+      control.setAttribute("aria-label", "Expandir o colapsar " + (node.navLabel || node.title));
+      control.setAttribute("aria-expanded", String(expanded));
+      if (navigable) {
+        chev.setAttribute("role", "button");
+        chev.setAttribute("tabindex", "0");
+      } else {
+        chev.setAttribute("aria-hidden", "true"); // decorativo: el row es el botón
+      }
+
+      const setOpen = (open) => {
+        wrap.classList.toggle("collapsed", !open);
+        control.setAttribute("aria-expanded", String(open));
+        if (open) EXPANDED.add(node.id); else EXPANDED.delete(node.id);
+      };
+      const onToggle = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(wrap.classList.contains("collapsed")); // colapsado → abre · abierto → cierra
+      };
+
+      const target = navigable ? chev : row;
+      target.addEventListener("click", onToggle);
+      target.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") onToggle(e);
+      });
+    }
+
+    wrap.appendChild(row);
+    if (kids) wrap.appendChild(kids);
+    return wrap;
   }
 
   /* ---- Breadcrumb ---- */
@@ -183,10 +265,8 @@
     applyAccent(section);
     document.body.dataset.section = section;
 
-    // nav activo
-    document.querySelectorAll(".nav-link").forEach((a) =>
-      a.classList.toggle("active", a.dataset.id === id)
-    );
+    // nav: se reconstruye con el id activo (marca activo + expande su rama)
+    buildSidebar(id);
 
     buildCrumbs(id);
 
@@ -261,10 +341,19 @@
   function wireSearch() {
     const input = $("#search");
     if (!input) return;
+    const nav = $("#nav");
     input.addEventListener("input", () => {
       const q = input.value.trim().toLowerCase();
-      document.querySelectorAll(".nav-link").forEach((a) => {
-        const hit = !q || a.textContent.toLowerCase().includes(q);
+      if (!q) {
+        // limpiar: restaura el estado de colapso por defecto de la ruta actual
+        nav.classList.remove("searching");
+        buildSidebar(routeOf());
+        return;
+      }
+      // mientras se busca, se expande todo y se filtran solo las hojas
+      nav.classList.add("searching");
+      nav.querySelectorAll(".nav-leaf").forEach((a) => {
+        const hit = a.textContent.toLowerCase().includes(q);
         a.style.display = hit ? "" : "none";
       });
     });
@@ -275,8 +364,7 @@
     const app = $("#app");
     $("#menuToggle").addEventListener("click", () => app.classList.toggle("nav-open"));
     $("#scrim").addEventListener("click", () => app.classList.remove("nav-open"));
-    document.querySelectorAll(".nav-link, #crumbs a, .page-nav a").forEach(() => {});
-    // cerrar drawer al navegar (deleg.)
+    // cerrar drawer al navegar (deleg.) — solo enlaces reales, no el chevron
     document.addEventListener("click", (e) => {
       if (e.target.closest("a[href^='#/']")) app.classList.remove("nav-open");
     });
@@ -298,7 +386,7 @@
         securityLevel: "loose",
       });
     }
-    buildSidebar();
+    buildSidebar(routeOf());
     wireSearch();
     wireChrome();
     window.addEventListener("hashchange", () => render(routeOf()));

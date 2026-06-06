@@ -1,4 +1,4 @@
-# 🎧 Corazón · Playbook de Soporte / Customer Success
+# Playbook: Customer Success
 
 *Un playbook de disciplina del [Corazón](#/corazon), dentro del sistema [Producto de Cabeza, Tripa y Corazón](#/inicio)*
 

@@ -1,6 +1,6 @@
-# 🧰 Plantillas, Guías y Craft
+# 📄 Plantillas
 
-*El repositorio central del sistema [Producto de Cabeza, Tripa y Corazón](#/inicio)*
+*La barra de plantillas del sistema [Producto de Cabeza, Tripa y Corazón](#/inicio)*
 
 | | |
 | --- | --- |
@@ -11,9 +11,9 @@
 
 ---
 
-## 🌮 Qué es este repositorio — la barra del taquero
+## 🌮 Qué es el repositorio — la barra del taquero
 
-Este documento es la **barra de *mise en place*** del sistema: el lugar donde viven, picados y listos para tomarse, todos los recursos reutilizables que las disciplinas y las prácticas compartidas necesitan para trabajar.
+Esta página es la **barra de *mise en place*** del sistema: el lugar donde viven, picados y listos para tomarse, todos los recursos reutilizables que las disciplinas y las prácticas compartidas necesitan para trabajar.
 
 Los marcos ([Cabeza](#/cabeza), [Tripa](#/tripa)) y los playbooks ([Corazón](#/corazon)) son las **recetas**. Una receta dice *"toma el Brief de la barra"* — no reimprime el Brief entero. Así, cada recurso vive **en un solo lugar** (esta barra), y todo lo demás lo **referencia**. Si el Brief cambia, cambia una sola vez y todas las recetas quedan al día.
 
@@ -23,11 +23,13 @@ Los marcos ([Cabeza](#/cabeza), [Tripa](#/tripa)) y los playbooks ([Corazón](#/
 
 ## Los tres tipos de recurso
 
-La barra guarda tres clases de cosa, y conviene no confundirlas:
+La barra guarda tres clases de cosa, hoy repartidas en tres categorías del menú. Conviene no confundirlas:
 
-1. 📄 **Plantillas** — artefactos con estructura fija que alguien llena (Brief, Plan de Investigación, Spec, PRD, Release Checklist…). Son el *molde*.
-2. 🧭 **Guías de proceso** — cómo conducir un ritual o una actividad de principio a fin. Son la *receta de la actividad*.
-3. ✨ **Craft / especialidad táctica** — cómo hacer bien el oficio fino de cada disciplina (buena UI, motion, microcopy, técnicas de análisis). Es el *sazón* que no se aprende llenando un molde.
+1. 📄 **Plantillas** — artefactos con estructura fija que alguien llena (Brief, Plan de Investigación, Spec, PRD, Release Checklist…). Son el *molde*. **Viven en esta página.**
+2. 🧭 **[Guías de proceso](#/guias)** — cómo conducir un ritual o una actividad de principio a fin. Son la *receta de la actividad*.
+3. ✨ **[Craft / especialidad táctica](#/craft)** — cómo hacer bien el oficio fino de cada disciplina (buena UI, motion, microcopy, técnicas de análisis). Es el *sazón* que no se aprende llenando un molde.
+
+Esta página es la principal de la barra: aquí vive el encuadre general (qué es el repositorio, los dos ejes de organización y la leyenda de estado), que aplica por igual a [Guías](#/guias) y [Craft](#/craft).
 
 ---
 
@@ -57,6 +59,8 @@ flowchart TD
 
 ## Leyenda de estado
 
+Esta leyenda es transversal: vale también para [Guías](#/guias) y [Craft](#/craft).
+
 | Símbolo | Significado |
 | --- | --- |
 | ✅ | **Completo** — migrado a la barra, listo para usarse |
@@ -66,154 +70,131 @@ flowchart TD
 
 ---
 
-## 🗂️ Índice por fase (Discover → Deliver)
+## 🗂️ Plantillas por fase (Discover → Deliver)
+
+Solo plantillas. Las **guías** de cada fase viven en [Guías de proceso](#/guias) y los recursos de **craft** en [Craft / especialidad](#/craft). Las plantillas marcadas ⏳ aún no tienen página (se mencionan como texto plano).
 
 ### Discover (D1) — qué construir y por qué
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| PRD | Plantilla | Producto | ⏳ |
-| [Opportunity Solution Tree](#/plantillas/opportunity-solution-tree) | Plantilla | Producto / equipo | ✅ |
-| [Priorización RICE](#/guias/rice) | Plantilla + Guía | Producto | ✅ |
-| [Construir el OST paso a paso](#/guias/ost-paso-a-paso) | Guía | Producto / equipo | ✅ |
-| [Plan de Investigación](#/plantillas/plan-de-investigacion) | Plantilla | Research *(transversal D1–D3)* | ✅ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| PRD | Producto | ⏳ |
+| [Opportunity Solution Tree](#/plantillas/opportunity-solution-tree) | Producto / equipo | ✅ |
+| [Plan de Investigación](#/plantillas/plan-de-investigacion) | Research *(transversal D1–D3)* | ✅ |
 
 ### Design (D2) — función y forma
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| [Product Design Brief](#/plantillas/product-design-brief) | Plantilla | Diseño | ✅ |
-| [Product Design Spec](#/plantillas/product-design-spec) | Plantilla | Diseño | ✅ |
-| RFC (solución técnica) | Plantilla | Ingeniería | ⏳ |
-| [Research Brief](#/plantillas/research-brief) | Plantilla | Research | ✅ |
-| [Notas de Sesión](#/plantillas/notas-de-sesion) | Plantilla | Research | ✅ |
-| [Estrategia de Análisis](#/plantillas/estrategia-de-analisis) | Plantilla | Research | ✅ |
-| [Reporte de Hallazgos](#/plantillas/reporte-de-hallazgos) | Plantilla | Research | ✅ |
-| Voiceover Internal Review | Plantilla | Diseño | ⏳ |
-| [Debrief y Síntesis Rápida](#/plantillas/debrief-sintesis) | Plantilla | Research | ✅ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| [Product Design Brief](#/plantillas/product-design-brief) | Diseño | ✅ |
+| [Product Design Spec](#/plantillas/product-design-spec) | Diseño | ✅ |
+| RFC (solución técnica) | Ingeniería | ⏳ |
+| [Research Brief](#/plantillas/research-brief) | Research | ✅ |
+| [Notas de Sesión](#/plantillas/notas-de-sesion) | Research | ✅ |
+| [Estrategia de Análisis](#/plantillas/estrategia-de-analisis) | Research | ✅ |
+| [Reporte de Hallazgos](#/plantillas/reporte-de-hallazgos) | Research | ✅ |
+| Voiceover Internal Review | Diseño | ⏳ |
+| [Debrief y Síntesis Rápida](#/plantillas/debrief-sintesis) | Research | ✅ |
 
 ### Develop (D3) — construir bien
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| [Spec de Ingeniería](#/plantillas/spec-ingenieria) | Plantilla | Ingeniería | ✅ |
-| ADR (si aplica) | Plantilla | Ingeniería | ⏳ |
-| [Pull Request](#/plantillas/pull-request) | Plantilla | Ingeniería | ✅ |
-| [Diario de trabajo](#/plantillas/diario-de-trabajo) | Plantilla | Ingeniería | ✅ |
-| [Design Review Deck](#/plantillas/design-review-deck) | Plantilla | Diseño | ✅ |
-| [Cómo llevar un Design Review](#/guias/design-review) | Guía | Diseño | ✅ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| [Spec de Ingeniería](#/plantillas/spec-ingenieria) | Ingeniería | ✅ |
+| ADR (si aplica) | Ingeniería | ⏳ |
+| [Pull Request](#/plantillas/pull-request) | Ingeniería | ✅ |
+| [Diario de trabajo](#/plantillas/diario-de-trabajo) | Ingeniería | ✅ |
+| [Design Review Deck](#/plantillas/design-review-deck) | Diseño | ✅ |
 
 ### Deploy (D4) — sacarlo a producción
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| [Release Checklist](#/plantillas/release-checklist) | Plantilla | Tripa / equipo | ✅ |
-| [Cadena de aprobación del Release](#/guias/cadena-release) | Guía | Tripa | ✅ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| [Release Checklist](#/plantillas/release-checklist) | Tripa / equipo | ✅ |
 
 ### Deliver (D5) — medir y cerrar el loop
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| [Impact Report](#/plantillas/impact-report) | Plantilla | Growth / Data | ✅ |
-| Post Mortem (si aplica) | Plantilla | equipo | ⏳ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| [Impact Report](#/plantillas/impact-report) | Growth / Data | ✅ |
+| Post Mortem (si aplica) | equipo | ⏳ |
 
 ### Transversal — no atado a una sola fase
 
-| Recurso | Tipo | Disciplina dueña | Estado |
-| --- | --- | --- | --- |
-| [Probing Questions](#/plantillas/probing-questions) | Plantilla | Research | ✅ |
-| [Guía de Discusión para Entrevista](#/plantillas/guia-de-discusion) | Plantilla | Research | ✅ |
-| [Script para Prueba de Usabilidad Moderada](#/plantillas/script-usabilidad) | Plantilla | Research | ✅ |
-| [Preguntas para Investigación de Dashboard](#/plantillas/preguntas-dashboard) | Plantilla | Research | ✅ |
-| [Pre-flight, conducción y moderación](#/guias/sesion-research) | Guía | Research | ✅ |
-| [Anti-bias checklist](#/guias/anti-bias) | Guía | Research | ✅ |
-| [Análisis a ciegas (procedimiento)](#/guias/analisis-ciegas) | Guía | Research | ✅ |
-| [Matriz para elegir método de research](#/guias/matriz-metodo) | Guía | Research | ✅ |
-| [Git · PR · CHANGELOG · SemVer](#/guias/git-pr-changelog) | Guía | Ingeniería | ✅ |
-| [Cómo llevar un Design Debt Review](#/guias/design-debt-review) | Guía | Diseño | ✅ |
-| [Cómo llevar un Design Critique informal](#/guias/design-critique) | Guía | Diseño | ✅ |
+| Recurso | Disciplina dueña | Estado |
+| --- | --- | --- |
+| [Probing Questions](#/plantillas/probing-questions) | Research | ✅ |
+| [Guía de Discusión para Entrevista](#/plantillas/guia-de-discusion) | Research | ✅ |
+| [Script para Prueba de Usabilidad Moderada](#/plantillas/script-usabilidad) | Research | ✅ |
+| [Preguntas para Investigación de Dashboard](#/plantillas/preguntas-dashboard) | Research | ✅ |
 
 ---
 
-## 🎯 Índice por disciplina
+## 🎯 Plantillas por disciplina
+
+Solo plantillas. Para las guías y el craft de cada disciplina, ver [Guías de proceso](#/guias) y [Craft / especialidad](#/craft).
 
 ### Producto
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| PRD | Plantilla | D1 | ⏳ |
-| [Opportunity Solution Tree](#/plantillas/opportunity-solution-tree) | Plantilla | D1 | ✅ |
-| [Priorización RICE](#/guias/rice) | Plantilla + Guía | D1 | ✅ |
-| [Construir el OST paso a paso](#/guias/ost-paso-a-paso) | Guía | D1 | ✅ |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| PRD | D1 | ⏳ |
+| [Opportunity Solution Tree](#/plantillas/opportunity-solution-tree) | D1 | ✅ |
 
 ### Diseño
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| [Product Design Brief](#/plantillas/product-design-brief) | Plantilla | D2 | ✅ |
-| [Product Design Spec](#/plantillas/product-design-spec) | Plantilla | D2 | ✅ |
-| [Design Review Deck](#/plantillas/design-review-deck) | Plantilla | D3/D4 | ✅ |
-| Voiceover Internal Review | Plantilla | D2 | ⏳ |
-| [Cómo llevar un Design Review](#/guias/design-review) | Guía | D3/D4 | ✅ |
-| [Cómo llevar un Design Debt Review](#/guias/design-debt-review) | Guía | Transversal | ✅ |
-| [Cómo llevar un Design Critique informal](#/guias/design-critique) | Guía | Transversal | ✅ |
-| [Craft de UI · motion · microcopy](#/craft/ui-motion-microcopy) | Craft | Transversal | 🌱 |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| [Product Design Brief](#/plantillas/product-design-brief) | D2 | ✅ |
+| [Product Design Spec](#/plantillas/product-design-spec) | D2 | ✅ |
+| [Design Review Deck](#/plantillas/design-review-deck) | D3/D4 | ✅ |
+| Voiceover Internal Review | D2 | ⏳ |
 
 ### Ingeniería
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| [Spec de Ingeniería](#/plantillas/spec-ingenieria) | Plantilla | D2/D3 | ✅ |
-| RFC | Plantilla | D2 | ⏳ |
-| ADR | Plantilla | D3 | ⏳ |
-| [Pull Request](#/plantillas/pull-request) | Plantilla | Transversal | ✅ |
-| [Diario de trabajo](#/plantillas/diario-de-trabajo) | Plantilla | Transversal | ✅ |
-| [Git · PR · CHANGELOG · SemVer](#/guias/git-pr-changelog) | Guía | Transversal | ✅ |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| [Spec de Ingeniería](#/plantillas/spec-ingenieria) | D2/D3 | ✅ |
+| RFC | D2 | ⏳ |
+| ADR | D3 | ⏳ |
+| [Pull Request](#/plantillas/pull-request) | Transversal | ✅ |
+| [Diario de trabajo](#/plantillas/diario-de-trabajo) | Transversal | ✅ |
 
 ### Research *(práctica de la [Cabeza](#/cabeza), facilitada por Diseño)*
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| [Plan de Investigación](#/plantillas/plan-de-investigacion) | Plantilla | D1–D3 | ✅ |
-| [Research Brief](#/plantillas/research-brief) | Plantilla | D1–D3 | ✅ |
-| [Notas de Sesión](#/plantillas/notas-de-sesion) | Plantilla | D1–D3 | ✅ |
-| [Estrategia de Análisis](#/plantillas/estrategia-de-analisis) | Plantilla | D1–D3 | ✅ |
-| [Reporte de Hallazgos](#/plantillas/reporte-de-hallazgos) | Plantilla | D2/D3/D5 | ✅ |
-| [Debrief y Síntesis Rápida](#/plantillas/debrief-sintesis) | Plantilla | Post-sesión | ✅ |
-| [Probing Questions](#/plantillas/probing-questions) | Plantilla | Transversal | ✅ |
-| [Guía de Discusión para Entrevista](#/plantillas/guia-de-discusion) | Plantilla | Transversal | ✅ |
-| [Script para Prueba de Usabilidad Moderada](#/plantillas/script-usabilidad) | Plantilla | Transversal | ✅ |
-| [Preguntas para Investigación de Dashboard](#/plantillas/preguntas-dashboard) | Plantilla | Transversal | ✅ |
-| [Catálogo de métodos de research](#/craft/catalogo-metodos) | Craft | Transversal | ✅ |
-| [Técnicas de análisis](#/craft/tecnicas-analisis) | Craft | Transversal | ✅ |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| [Plan de Investigación](#/plantillas/plan-de-investigacion) | D1–D3 | ✅ |
+| [Research Brief](#/plantillas/research-brief) | D1–D3 | ✅ |
+| [Notas de Sesión](#/plantillas/notas-de-sesion) | D1–D3 | ✅ |
+| [Estrategia de Análisis](#/plantillas/estrategia-de-analisis) | D1–D3 | ✅ |
+| [Reporte de Hallazgos](#/plantillas/reporte-de-hallazgos) | D2/D3/D5 | ✅ |
+| [Debrief y Síntesis Rápida](#/plantillas/debrief-sintesis) | Post-sesión | ✅ |
+| [Probing Questions](#/plantillas/probing-questions) | Transversal | ✅ |
+| [Guía de Discusión para Entrevista](#/plantillas/guia-de-discusion) | Transversal | ✅ |
+| [Script para Prueba de Usabilidad Moderada](#/plantillas/script-usabilidad) | Transversal | ✅ |
+| [Preguntas para Investigación de Dashboard](#/plantillas/preguntas-dashboard) | Transversal | ✅ |
 
 ### Growth / Data
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| [Impact Report](#/plantillas/impact-report) | Plantilla | D5 | ✅ |
-| Plan de medición y KPIs | Plantilla | D2/D5 | 🌱 |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| [Impact Report](#/plantillas/impact-report) | D5 | ✅ |
+| Plan de medición y KPIs | D2/D5 | 🌱 |
 
 ### Soporte / Customer Success
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| Materiales de autonomía del usuario | Plantilla | D4 | 🌱 |
+| Recurso | Fase | Estado |
+| --- | --- | --- |
+| Materiales de autonomía del usuario | D4 | 🌱 |
 
 ### Tripa *(práctica compartida, no disciplina)*
 
-| Recurso | Tipo | Fase | Estado |
-| --- | --- | --- | --- |
-| [Release Checklist](#/plantillas/release-checklist) | Plantilla | D4 | ✅ |
-| [Cadena de aprobación del Release](#/guias/cadena-release) | Guía | D4 | ✅ |
-| Post Mortem | Plantilla | D5 | ⏳ |
-
-### Curaduría compartida
-
-| Recurso | Tipo | Estado |
+| Recurso | Fase | Estado |
 | --- | --- | --- |
-| [Biblioteca de recursos](#/craft/biblioteca-recursos) | Craft | 🟡 |
+| [Release Checklist](#/plantillas/release-checklist) | D4 | ✅ |
+| Post Mortem | D5 | ⏳ |
 
 ---
 
-> 🚧 **Estado del esqueleto.** Los índices están completos y cada recurso ya tiene su propia página. En este checkpoint, el **[Plan de Investigación](#/plantillas/plan-de-investigacion)** está migrado como muestra; el resto de las plantillas se rellenará en capas posteriores. Navega cualquiera desde el menú lateral para ver su estado.
+> 🚧 **Estado del esqueleto.** Los índices están completos y cada plantilla con página ya existe en el menú. En este checkpoint, el **[Plan de Investigación](#/plantillas/plan-de-investigacion)** está migrado como muestra; el resto de las plantillas se rellenará en capas posteriores. Las [Guías](#/guias) y el [Craft](#/craft) viven en sus propias secciones.
